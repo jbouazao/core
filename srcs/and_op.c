@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 08:56:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/12 11:30:13 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:25:15 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		and_execute(t_vm *vm, t_proc **prcs)
 	if (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] >= 1 &&
 		vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] <= 16)
 		(*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1] = tmp_r;
-	return (crt_p + 1);
+	return (crt_p + 1);//carry carry carry
 }
 
 int		and_op(t_vm *vm, t_proc **prcs)

@@ -74,9 +74,9 @@ typedef struct s_proc
 
 typedef struct		s_ops
 {
-	char		op_tab[6];
-	int			ctw[6];
-	int			(*ops[6])(struct s_vm *vm, struct s_proc **procs);
+	char		op_tab[16];
+	int			ctw[16];
+	int			(*ops[16])(struct s_vm *vm, struct s_proc **procs);
 }					t_ops;
 
 typedef struct s_window
@@ -98,7 +98,6 @@ void    	set_exec_code(t_vm *vm, t_player *player);
 void		ft_init_player(t_player *p);
 int			sti_check_params(unsigned char c, t_op_arg *sti_arg);
 void		ft_init_args(t_op_arg *args);
-int			sti_op(t_vm *vm, t_proc *proc);
 int     	get_op(t_vm *vm, t_proc **prc);
 int32_t		u_to_int(uint8_t *arena, int idx, int size);
 
@@ -116,6 +115,16 @@ int			st_op(t_vm *vm, t_proc **prcs);
 int			add_op(t_vm *vm, t_proc **prcs);
 int			sub_op(t_vm *vm, t_proc **prcs);
 int			and_op(t_vm *vm, t_proc **prcs);
+int			or_op(t_vm *vm, t_proc **prcs);
+int			xor_op(t_vm *vm, t_proc **prcs);
+int			zjmp_op(t_vm *vm, t_proc **prcs);
+int			ldi_op(t_vm *vm, t_proc **prcs);
+int			sti_op(t_vm *vm, t_proc **prcs);
+int			fork_op(t_vm *vm, t_proc **prcs);
+int			lld_op(t_vm *vm, t_proc **prcs);
+int			lldi_op(t_vm *vm, t_proc **prcs);
+int			lfork_op(t_vm *vm, t_proc **prcs);
+int			aff_op(t_vm *vm, t_proc **prcs);
 
 
 /*

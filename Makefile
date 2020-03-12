@@ -7,14 +7,24 @@ SRCS =	srcs/main.c\
 		srcs/init_vm.c\
 		srcs/set_vm_code.c\
 		srcs/proces.c\
-		srcs/live_op.c\
 		srcs/exec_code.c\
 		srcs/visu.c\
+		srcs/live_op.c\
 		srcs/ld_op.c\
 		srcs/st_op.c\
 		srcs/add_op.c\
 		srcs/sub_op.c\
-		srcs/and_op.c
+		srcs/and_op.c\
+		srcs/or_op.c\
+		srcs/xor_op.c\
+		srcs/zjmp_op.c\
+		srcs/ldi_op.c\
+		srcs/sti_op.c\
+		srcs/fork_op.c\
+		srcs/lld_op.c\
+		srcs/lldi_op.c\
+		srcs/lfork_op.c\
+		srcs/aff_op.c
 
 OBJS = $(SRCS:.c=.o)
 

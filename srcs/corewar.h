@@ -29,6 +29,7 @@ typedef struct	s_player
 	unsigned char	champion_comment[2048];
 	unsigned char	*exec_code;
 	int				pid;
+	int				live;
 }				t_player;
 
 typedef struct s_op_arg
@@ -60,13 +61,13 @@ typedef struct	s_vm
 
 typedef struct s_proc
 {
-	uint8_t			current_op;
 	int32_t			r[REG_NUMBER];
+	int8_t			current_op;
 	t_op_arg		args;
-	int				next_step;
 	int				cycle_to_wait;
 	int				cur_pos;
 	int				carry;
+	int				live;
 	int				flag;
 	int				proc_clr;
 	struct s_proc	*next;
@@ -76,14 +77,8 @@ typedef struct		s_ops
 {
 	char		op_tab[16];
 	int			ctw[16];
-	int			(*ops[16])(struct s_vm *vm, struct s_proc **procs);
+	int			(*ops[16])(struct s_vm *vm, struct s_proc **procs, t_proc **head, t_player **player);
 }					t_ops;
-
-typedef struct s_window
-{
-	WINDOW		*win;
-	WINDOW		*menuwin;
-}				t_window;
 
 
 uint32_t	read_chk_bytes(int fd);
@@ -109,22 +104,22 @@ void	init_args(t_op_arg *args);
 ** ops_ft
 */
 int			skip_bytes(uint8_t c, int size_dir, int num_args);
-int			live_op(t_vm *vm, t_proc **proc);
-int			ld_op(t_vm *vm, t_proc **prcs);
-int			st_op(t_vm *vm, t_proc **prcs);
-int			add_op(t_vm *vm, t_proc **prcs);
-int			sub_op(t_vm *vm, t_proc **prcs);
-int			and_op(t_vm *vm, t_proc **prcs);
-int			or_op(t_vm *vm, t_proc **prcs);
-int			xor_op(t_vm *vm, t_proc **prcs);
-int			zjmp_op(t_vm *vm, t_proc **prcs);
-int			ldi_op(t_vm *vm, t_proc **prcs);
-int			sti_op(t_vm *vm, t_proc **prcs);
-int			fork_op(t_vm *vm, t_proc **prcs);
-int			lld_op(t_vm *vm, t_proc **prcs);
-int			lldi_op(t_vm *vm, t_proc **prcs);
-int			lfork_op(t_vm *vm, t_proc **prcs);
-int			aff_op(t_vm *vm, t_proc **prcs);
+int			live_op(t_vm *vm, t_proc **proc, t_proc **head, t_player **player);
+int			ld_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			st_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			add_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			sub_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			and_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			or_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			xor_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			zjmp_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			ldi_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			sti_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			fork_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			lld_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			lldi_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			lfork_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
+int			aff_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player);
 
 
 /*

@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:51:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/11 13:48:07 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/14 14:03:07 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ int		ld_execute(t_vm	*vm, t_proc **prcs)
 
 	tmp_idx = 0;
 	crt_p = 0;
-	if ((*prcs)->args.arg1 == 2 && (crt_p = 4))
+	if ((*prcs)->args.arg1 == DIR_CODE && (crt_p = 4))
 	{
 		tmp_r2 = vm->arena[(*prcs)->cur_pos] << 24 | vm->arena[((*prcs)->cur_pos + 1) % 4096] << 16 | vm->arena[((*prcs)->cur_pos + 2) % 4096] << 8 | vm->arena[((*prcs)->cur_pos + 3) % 4096];
 			// ft_printf("4a %d\n", tmp_r2);
 	}
-	else if ((*prcs)->args.arg1 == 3 && (crt_p = 2))
+	else if ((*prcs)->args.arg1 == IND_CODE && (crt_p = 2))
 	{
 		tmp_idx = (vm->arena[(*prcs)->cur_pos] << 8) | ((vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE]));
 		tmp_idx = ((*prcs)->cur_pos - 2 + ((tmp_idx % IDX_MOD)) + MEM_SIZE) % MEM_SIZE;
@@ -91,10 +91,11 @@ int		ld_execute(t_vm	*vm, t_proc **prcs)
 	return (crt_p + 1);
 }
 
-int		ld_op(t_vm *vm, t_proc **prcs)
+int		ld_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 {
 	int		arg_ret;
 
+	(void)head;
 	(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 	init_args(&(*prcs)->args);
 	if (!ld_check_arg(vm->arena[(*prcs)->cur_pos], &(*prcs)->args))

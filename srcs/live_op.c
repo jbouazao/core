@@ -6,13 +6,13 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 15:42:49 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/08 17:42:23 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/14 14:03:06 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int live_op(t_vm *vm, t_proc **prcs)
+int live_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 {
     
     return (1);

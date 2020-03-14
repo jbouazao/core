@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:45:31 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/11 13:48:14 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/14 14:03:21 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,11 @@ int		st_execute(t_vm	*vm, t_proc **prcs)
 	return ((*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg2);
 }
 
-int	st_op(t_vm *vm, t_proc **prcs)
+int	st_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 {
 	int		arg_ret;
 
+	(void)head;
 	(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 	init_args(&(*prcs)->args);
 	if (!st_check_arg(vm->arena[(*prcs)->cur_pos], &(*prcs)->args))

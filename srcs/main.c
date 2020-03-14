@@ -5,14 +5,16 @@ void init_player(t_player *player)
 {
 	player->file_name = NULL;
 	player->exec_code = NULL;
+	player->live = 0;
 }
 
 int main (int ac, char **av)
 {
-	t_player player[4];
+	t_player *player;
 	int i;
 
 	i = 0;
+	player = ft_memalloc(sizeof(t_player) * 4);
 	while (i < ac - 1)
 	{
 		init_player(&player[i]);
@@ -79,7 +81,7 @@ int main (int ac, char **av)
 	i = 1;
 	// while (i < 4097)
 	// {
-	// 	ft_printf("%02x ", vm.arena[i - 1]);
+		ft_printf("num --> %d \n", -513 % 512);
 	// 	if ((i % 64) == 0 && i != 0)
 	// 		ft_printf("\n");
 	// 	i++;
@@ -95,6 +97,7 @@ int main (int ac, char **av)
 		it_prcs = prcs;
 		while (it_prcs)
 		{
+			ft_printf("Cycle %d\n", vm.cycles);
 			if (it_prcs->flag == 0)
 			{
 				if (!get_op(&vm, &it_prcs))
@@ -104,8 +107,7 @@ int main (int ac, char **av)
 			}
 			if ((it_prcs->cycle_to_wait -= 1) && (it_prcs->cycle_to_wait) == 1)
 			{
-				ft_printf("Cycle %d\n", vm.cycles);
-				ops.ops[it_prcs->current_op](&vm, &it_prcs);
+				ops.ops[it_prcs->current_op](&vm, &it_prcs, &prcs, &player);
 				it_prcs->flag = 0;
 				// i = 1;
 			}

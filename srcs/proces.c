@@ -13,7 +13,7 @@ t_proc	*init_proc(t_vm *vm, t_player player, t_proc **prcs)
 		new->r[j++] = 0;
 	new->cur_pos = (player.pid - 1) * (MEM_SIZE / vm->nbr_of_args);
 	new->cycle_to_wait = 0;
-	new->next_step = 0;
+	new->live = 0;
 	new->flag = 0;
 	new->carry = 0;
 	new->proc_clr = player.pid;

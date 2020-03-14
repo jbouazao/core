@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 14:06:04 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/11 15:57:53 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/14 14:00:08 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ int		add_execut(t_vm *vm, t_proc **prcs)
 	return ((*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg1);
 }
 
-int		add_op(t_vm *vm, t_proc **prcs)
+int		add_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 {
 	int		arg_ret;
 
+	(void)head;
 	arg_ret = 0;
 	(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 	init_args(&(*prcs)->args);

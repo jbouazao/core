@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   proces.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/22 13:45:20 by oelbelam          #+#    #+#             */
+/*   Updated: 2020/03/22 17:30:11 by oelbelam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 t_proc	*init_proc(t_vm *vm, t_player player, t_proc **prcs)
@@ -21,25 +33,34 @@ t_proc	*init_proc(t_vm *vm, t_player player, t_proc **prcs)
 	return (new);
 }
 
-
 void	init_procs(t_vm *vm, t_player *player, t_proc **prcs)
 {
 	int i;
 	int j;
-	t_proc *head;
+	t_proc *tail;
+	t_proc *it_prev;
 
 	j = 1;
 	i = vm->nbr_of_args - 1;
 	while (i >= 0)
 	{
 		if (!*prcs)
+		{
 			*prcs = init_proc(vm, player[i], prcs);
+			(*prcs)->prev = NULL;
+		}
 		else
 		{
-			head = *prcs;
-			while (head->next)
-				head = head->next;
-			head->next = init_proc(vm, player[i], prcs);
+			tail = *prcs;
+			it_prev = tail;
+			while (tail->next)
+			{
+				it_prev = tail;
+				tail = tail->next;
+			}
+			tail->next = init_proc(vm, player[i], prcs);
+			tail->next->prev = tail;
+			ft_printf("===? %d\n", tail->next->prev->r[0]);
 		}
 		i--;
 	}

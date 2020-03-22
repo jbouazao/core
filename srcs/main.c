@@ -71,6 +71,7 @@ int main (int ac, char **av)
 	t_vm    vm;
 	vm.nbr_of_args = ac - 1;
 	init_vm(&vm);
+	vm.num_player = ac - 1;
 	set_exec_code(&vm, player);
 	t_proc		*prcs;
 	t_proc		*it_prcs;
@@ -92,12 +93,19 @@ int main (int ac, char **av)
 	while (1)
 	{
 		vm.cycles++;
-		// if (flag == 1 && cycles % c_to_die == 0)
-		//     check_ft();
+			// ft_printf("Cycle %d flag = %d\n", vm.cycles, flag);
+		if ((vm.cycles % vm.c_to_die) == 0)
+		{
+			ft_printf("%d IM HERE1\n", vm.cycles);
+			check_ft(&vm, &prcs);
+		}
 		it_prcs = prcs;
+		// if ((vm.cycles % vm.c_to_die) == 0)
+		// 	ft_printf("---> %p \n", prcs);
+		if (!it_prcs)
+			break;
 		while (it_prcs)
 		{
-			ft_printf("Cycle %d\n", vm.cycles);
 			if (it_prcs->flag == 0)
 			{
 				if (!get_op(&vm, &it_prcs))
@@ -112,7 +120,7 @@ int main (int ac, char **av)
 				// i = 1;
 			}
 			// i = (i + 1) % MEM_SIZE;
-			visu(&vm, prcs);
+			// visu(&vm, prcs);
 			// it_prcs->cur_pos = (it_prcs->cur_pos + 1) % MEM_SIZE;
 			it_prcs = it_prcs->next;
 		}

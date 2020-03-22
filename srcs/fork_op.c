@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:27:03 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:03:12 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/22 14:27:48 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_proc	*dup_prcs(t_proc *prcs, int16_t dir)
 	new->flag = 0;
 	new->carry = prcs->carry;
 	new->next = NULL;
+	new->prev = NULL;
 	return(new);
 }
 
@@ -53,6 +54,7 @@ int fork_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	init_args(&(*prcs)->args);
 	new = execute_fork(vm, prcs);
 	new->next = *head;
+	(*head)->prev = new;
 	*head = new;
 	return (1);
 }

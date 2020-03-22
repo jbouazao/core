@@ -24,7 +24,8 @@ SRCS =	srcs/main.c\
 		srcs/lld_op.c\
 		srcs/lldi_op.c\
 		srcs/lfork_op.c\
-		srcs/aff_op.c
+		srcs/aff_op.c \
+		srcs/check_ft.c
 
 OBJS = $(SRCS:.c=.o)
 

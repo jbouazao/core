@@ -53,6 +53,7 @@ typedef struct	s_vm
 	int			cycles;
 	int			lv_bf_c_todie;
 	int			c_to_die;
+	int			num_player;
 	int			nbr_chks;
 	int			nbr_lives;
 	t_player	*players;
@@ -70,6 +71,7 @@ typedef struct s_proc
 	int				live;
 	int				flag;
 	int				proc_clr;
+	struct s_proc	*prev;
 	struct s_proc	*next;
 }				t_proc;
 
@@ -99,6 +101,8 @@ int32_t		u_to_int(uint8_t *arena, int idx, int size);
 t_ops	get_ops(void);
 
 void	init_args(t_op_arg *args);
+
+int		check_ft(t_vm *vm, t_proc **prcs);
 
 /*
 ** ops_ft

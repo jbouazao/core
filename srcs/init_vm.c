@@ -14,6 +14,8 @@ void    init_vm(t_vm *vm)
     vm->cycles = 0;
     vm->win_id = 0;
     vm->players = NULL;
+    vm->num_player = 0;
+    vm->nbr_lives = 0;
     vm->nbr_chks = 0;
     vm->lv_bf_c_todie = 0;
 }

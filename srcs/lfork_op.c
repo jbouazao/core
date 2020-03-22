@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:28:25 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:03:15 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/03/22 14:28:27 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_proc	*dup_prcs(t_proc *prcs, int16_t dir)
 	new->flag = 0;
 	new->carry = prcs->carry;
 	new->next = NULL;
+	new->prev = NULL;
 	return(new);
 }
 
@@ -53,6 +54,7 @@ int lfork_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	init_args(&(*prcs)->args);
 	new = execute_lfork(vm, prcs);
 	new->next = *head;
+	(*head)->prev = new;
 	*head = new;
 	return (1);
 }

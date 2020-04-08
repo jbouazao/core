@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 14:06:04 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:00:08 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/08 19:14:48 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,6 @@ int		add_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	{
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + add_execut(vm, prcs)) % MEM_SIZE;
-		ft_printf("ADD register 1 %d\n", (*prcs)->r[0]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[1]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[2]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[3]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[4]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[5]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[6]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[8]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[9]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[10]);
-		ft_printf("ADD register 2 %d\n", (*prcs)->r[11]);
 	}
 	return (1);
 }

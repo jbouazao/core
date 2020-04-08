@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:25:52 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:03:06 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/07 18:42:26 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ int		ldi_execute(t_vm *vm, t_proc **prcs)
 	}
 	else if ((*prcs)->args.arg2 == DIR_CODE)
 	{
-		ft_printf("arena %x\n", (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]));
 		tmp_idx += (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]);
 		tmp_idx2 = tmp_idx + tmp_idx2;
-		ft_printf("tmp_idx %d\n", tmp_r);
 		crt_p += 2;
 	}
 	if (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] >= 1 &&
@@ -101,8 +99,6 @@ int 	ldi_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	{
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + ldi_execute(vm, prcs)) % MEM_SIZE;
-		ft_printf("LDI register 1 %d\n", (*prcs)->r[0]);
-		ft_printf("LDI register 2 %d\n", (*prcs)->r[1]);
 	}
 	return (1);
 }

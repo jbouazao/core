@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:27:34 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:03:09 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/07 18:43:02 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		lld_execute(t_vm	*vm, t_proc **prcs)
 	{
 		tmp_idx = (vm->arena[(*prcs)->cur_pos] << 8) | ((vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE]));
 		tmp_idx = ((*prcs)->cur_pos - 2 + tmp_idx + MEM_SIZE) % MEM_SIZE;//
-		ft_printf("----------->%d\n", tmp_idx); 
 		// ft_printf("3a %d\n", tmp_idx);
 		tmp_r2 = vm->arena[tmp_idx] << 24 | vm->arena[(tmp_idx + 1) % MEM_SIZE] << 16 | vm->arena[(tmp_idx + 2) % MEM_SIZE] << 8 | vm->arena[(tmp_idx + 3) % MEM_SIZE];
 	}
@@ -85,8 +84,6 @@ int		lld_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	{
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + lld_execute(vm, prcs)) % MEM_SIZE;
-		ft_printf("LD register 1 %d\n", (*prcs)->r[0]);
-		ft_printf("LD register 2 %d\n", (*prcs)->r[1]);
 	}
 	return (1);
 }

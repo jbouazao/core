@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:26:20 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:03:21 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/07 18:47:54 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int		sti_execute(t_vm *vm, t_proc **prcs)
 	else if ((*prcs)->args.arg3 == DIR_CODE)
 	{
 		tmp_idx = (tmp_idx + (vm->arena[((*prcs)->cur_pos + 1 + crt_p) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos + 1 + crt_p + 1) % MEM_SIZE]));
-		ft_printf("2|%d|\n", tmp_idx);
 		tmp_idx2 = tmp_idx + tmp_idx2;
 		tmp_idx2 = ((*prcs)->cur_pos - 2 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE;
 		crt_p += 2;
@@ -86,7 +85,6 @@ int		sti_execute(t_vm *vm, t_proc **prcs)
 		vm->arena[((*prcs)->cur_pos) % MEM_SIZE] <= 16)
 		{
 			tmp_r = (*prcs)->r[vm->arena[(*prcs)->cur_pos] - 1];
-			ft_printf("TMP_IDX2 %d\n", tmp_idx2);
 			vm->arena[tmp_idx2] = (tmp_r & 0b11111111000000000000000000000000) >> 24;
 			vm->arena[(tmp_idx2 + 1) % MEM_SIZE] = (tmp_r & 0b00000000111111110000000000000000) >> 16;
 			vm->arena[(tmp_idx2 + 2) % MEM_SIZE] = (tmp_r & 0b00000000000000001111111100000000) >> 8;
@@ -113,8 +111,6 @@ int 	sti_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	{
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + sti_execute(vm, prcs)) % MEM_SIZE;
-		ft_printf("STI register 1 %d\n", (*prcs)->r[0]);
-		ft_printf("STI register 2 %d\n", (*prcs)->r[1]);
 	}
 	return (1);
 }

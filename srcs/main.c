@@ -8,6 +8,18 @@ void init_player(t_player *player)
 	player->live = 0;
 }
 
+void    re_init_live(t_proc **proc)
+{
+    t_proc *it_proc;
+
+    it_proc = *proc;
+    while (it_proc)
+    {
+        it_proc->live = 0;
+        it_proc = it_proc->next;
+    }
+}
+
 int main (int ac, char **av)
 {
 	t_player *player;
@@ -75,6 +87,7 @@ int main (int ac, char **av)
 	set_exec_code(&vm, player);
 	t_proc		*prcs;
 	t_proc		*it_prcs;
+	int			dump;
 	t_ops		ops = get_ops();
 
 	prcs = NULL;
@@ -82,7 +95,8 @@ int main (int ac, char **av)
 	i = 1;
 	// while (i < 4097)
 	// {
-		ft_printf("num --> %d \n", -513 % 512);
+	//8837 diyat l mouchkila
+	dump = 8837;
 	// 	if ((i % 64) == 0 && i != 0)
 	// 		ft_printf("\n");
 	// 	i++;
@@ -93,11 +107,18 @@ int main (int ac, char **av)
 	while (1)
 	{
 		vm.cycles++;
-			// ft_printf("Cycle %d flag = %d\n", vm.cycles, flag);
-		if ((vm.cycles % vm.c_to_die) == 0)
+		// ft_printf("Cycle %d\n", vm.cycles);
+		// ft_printf("Cycle_to_di |%d|   \n", vm.c_to_die);
+		// ft_printf("NBR_CHECKS |%d|    \n", vm.nbr_chks);
+		if (vm.c_to_die >= 0 && ((vm.cycles % vm.c_to_die) == 0))
 		{
-			ft_printf("%d IM HERE1\n", vm.cycles);
 			check_ft(&vm, &prcs);
+            re_init_live(&prcs);
+		}
+		else if (vm.c_to_die < 0)
+		{
+			check_ft(&vm, &prcs);
+            re_init_live(&prcs);			
 		}
 		it_prcs = prcs;
 		// if ((vm.cycles % vm.c_to_die) == 0)
@@ -123,6 +144,21 @@ int main (int ac, char **av)
 			// visu(&vm, prcs);
 			// it_prcs->cur_pos = (it_prcs->cur_pos + 1) % MEM_SIZE;
 			it_prcs = it_prcs->next;
+		}
+		if (dump == vm.cycles)
+		{
+			short	it;
+			it = 0;
+			ft_printf("0x0000 : ");
+			while (it < 4096)
+			{
+				// if (it != 0 && (it % 63) == 0)
+				// 	ft_printf("\n");
+				if (it != 0 && it % 64 == 0)
+					ft_printf("\n%#.4x : ", it);
+				ft_printf("%02x ", vm.arena[it]);
+				it++;
+			}
 		}
 		if (flag == 2)
 			return(0);

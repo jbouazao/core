@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:51:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/14 14:03:07 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/07 18:46:37 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ int		ld_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	{
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + 1) % MEM_SIZE;
 		(*prcs)->cur_pos = ((*prcs)->cur_pos + ld_execute(vm, prcs)) % MEM_SIZE;
-		ft_printf("LD register 1 %d\n", (*prcs)->r[0]);
-		ft_printf("LD register 2 %d\n", (*prcs)->r[1]);
 	}
 	return (1);
 }

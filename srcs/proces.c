@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/22 13:45:20 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/03/22 17:30:11 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/07 18:40:22 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_proc	*init_proc(t_vm *vm, t_player player, t_proc **prcs)
 
 	j = 1;
 	new = (t_proc*)ft_memalloc(sizeof(t_proc));
-	ft_printf("PLYAER PID %d\n", player.pid);
 	new->r[0] = player.pid * -1;
 	while (j < 16)
 		new->r[j++] = 0;
@@ -60,7 +59,6 @@ void	init_procs(t_vm *vm, t_player *player, t_proc **prcs)
 			}
 			tail->next = init_proc(vm, player[i], prcs);
 			tail->next->prev = tail;
-			ft_printf("===? %d\n", tail->next->prev->r[0]);
 		}
 		i--;
 	}

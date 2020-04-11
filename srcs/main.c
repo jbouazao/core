@@ -130,7 +130,11 @@ int main (int ac, char **av)
 			if (it_prcs->flag == 0)
 			{
 				if (!get_op(&vm, &it_prcs))
+				{
 					it_prcs->cur_pos = (it_prcs->cur_pos + 1) % MEM_SIZE;
+					it_prcs = it_prcs->next;
+					continue;
+				}
 				else
 					it_prcs->flag = 1;
 			}
@@ -140,15 +144,31 @@ int main (int ac, char **av)
 				it_prcs->flag = 0;
 				// i = 1;
 			}
-			// i = (i + 1) % MEM_SIZE;
 			// visu(&vm, prcs);
+			// i = (i + 1) % MEM_SIZE;
 			// it_prcs->cur_pos = (it_prcs->cur_pos + 1) % MEM_SIZE;
 			it_prcs = it_prcs->next;
 		}
 		if (dump == vm.cycles)
 		{
 			short	it;
+			int p = 0 , l = 0;
 			it = 0;
+			it_prcs = prcs;
+			// while (it_prcs)
+			// {
+			// 	ft_printf("--------- Proc %d --------- \n ", p);
+			// 	ft_printf("current pos  %d \n ", it_prcs->cur_pos);
+			// 	ft_printf("current OP  %d \n ", it_prcs->current_op);
+			// 	l = 0;
+			// 	while (l < 16)
+			// 	{
+			// 		ft_printf("register_num[%d] = %d\n", l, it_prcs->r[l]);
+			// 		l++;
+			// 	}
+			// 	it_prcs = it_prcs->next;
+			// 	p++;
+			// }
 			ft_printf("0x0000 : ");
 			while (it < 4096)
 			{
@@ -169,5 +189,4 @@ int main (int ac, char **av)
 	//     ft_printf("POS %d | R1 -> %d\n", prcs->cur_pos, prcs->r[0]);
 	//     prcs = prcs->next;
 	// }
-
 }

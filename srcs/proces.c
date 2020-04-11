@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/22 13:45:20 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:40:22 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/11 00:59:56 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_proc	*init_proc(t_vm *vm, t_player player, t_proc **prcs)
 	new->live = 0;
 	new->flag = 0;
 	new->carry = 0;
+	new->current_op = -1;
 	new->proc_clr = player.pid;
 	new->next = NULL;
 	return (new);

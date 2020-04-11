@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:51:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:46:37 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/11 01:08:23 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		ld_check_arg(uint8_t c, t_op_arg *args)
 		error = 0;
 	if ((((c >> 4) & 0b0011) == REG_CODE))
 	{
-		
 		args->arg2 = 1 + 0 * args->sz_arg2++;
 	}
 	else
@@ -41,22 +40,22 @@ int		skip_bytes(uint8_t c, int size_dir, int num_args)
 	int		bytes;
 
 	bytes = 0;
-	bytes += (((c >> 6) & REG_CODE) == REG_CODE) ? 1 : 0;
-	bytes += (((c >> 6) & DIR_CODE) == DIR_CODE) ? size_dir : 0;
-	bytes += (((c >> 6) & IND_CODE) == IND_CODE) ? 2 : 0;
+	bytes += (((c >> 6) & 0b11) == REG_CODE) ? 1 : 0;
+	bytes += (((c >> 6) & 0b11) == DIR_CODE) ? size_dir : 0;
+	bytes += (((c >> 6) & 0b11) == IND_CODE) ? 2 : 0;
 	if (num_args >= 2)
 	{
-		bytes += (((c >> 4) & REG_CODE) == REG_CODE) ? 1 : 0;
-		bytes += (((c >> 4) & DIR_CODE) == DIR_CODE) ? size_dir : 0;
-		bytes += (((c >> 4) & IND_CODE) == IND_CODE) ? 2 : 0;
+		bytes += (((c >> 4) & 0b0011) == REG_CODE) ? 1 : 0;
+		bytes += (((c >> 4) & 0b0011) == DIR_CODE) ? size_dir : 0;
+		bytes += (((c >> 4) & 0b0011) == IND_CODE) ? 2 : 0;
 	}
 	if (num_args == 3)
 	{
-		bytes += (((c >> 2) & REG_CODE) == REG_CODE) ? 1 : 0;
-		bytes += (((c >> 2) & DIR_CODE) == DIR_CODE) ? size_dir : 0;
-		bytes += (((c >> 2) & IND_CODE) == IND_CODE) ? 2 : 0;
+		bytes += (((c >> 2) & 0b000011) == REG_CODE) ? 1 : 0;
+		bytes += (((c >> 2) & 0b000011) == DIR_CODE) ? size_dir : 0;
+		bytes += (((c >> 2) & 0b000011) == IND_CODE) ? 2 : 0;
 	}
-	return (bytes);
+	return (bytes + 1);
 }
 
 int		ld_execute(t_vm	*vm, t_proc **prcs)

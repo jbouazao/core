@@ -96,7 +96,8 @@ int main (int ac, char **av)
 	// while (i < 4097)
 	// {
 	//8837 diyat l mouchkila
-	dump = 8837;
+	// dump = 10700;
+	dump = 400;
 	// 	if ((i % 64) == 0 && i != 0)
 	// 		ft_printf("\n");
 	// 	i++;
@@ -144,44 +145,44 @@ int main (int ac, char **av)
 				it_prcs->flag = 0;
 				// i = 1;
 			}
-			// visu(&vm, prcs);
 			// i = (i + 1) % MEM_SIZE;
 			// it_prcs->cur_pos = (it_prcs->cur_pos + 1) % MEM_SIZE;
 			it_prcs = it_prcs->next;
 		}
-		if (dump == vm.cycles)
-		{
-			short	it;
-			int p = 0 , l = 0;
-			it = 0;
-			it_prcs = prcs;
-			// while (it_prcs)
-			// {
-			// 	ft_printf("--------- Proc %d --------- \n ", p);
-			// 	ft_printf("current pos  %d \n ", it_prcs->cur_pos);
-			// 	ft_printf("current OP  %d \n ", it_prcs->current_op);
-			// 	l = 0;
-			// 	while (l < 16)
-			// 	{
-			// 		ft_printf("register_num[%d] = %d\n", l, it_prcs->r[l]);
-			// 		l++;
-			// 	}
-			// 	it_prcs = it_prcs->next;
-			// 	p++;
-			// }
-			ft_printf("0x0000 : ");
-			while (it < 4096)
-			{
-				// if (it != 0 && (it % 63) == 0)
-				// 	ft_printf("\n");
-				if (it != 0 && it % 64 == 0)
-					ft_printf("\n%#.4x : ", it);
-				ft_printf("%02x ", vm.arena[it]);
-				it++;
-			}
-		}
-		if (flag == 2)
-			return(0);
+		visu(&vm, prcs);
+		// if (dump == vm.cycles)
+		// {
+		// 	short	it;
+		// 	int p = 0 , l = 0;
+		// 	it = 0;
+		// 	it_prcs = prcs;
+		// 	// while (it_prcs)
+		// 	// {
+		// 	// 	ft_printf("--------- Proc %d --------- \n ", p);
+		// 	// 	ft_printf("current pos  %d \n ", it_prcs->cur_pos);
+		// 	// 	ft_printf("current OP  %d \n ", it_prcs->current_op);
+		// 	// 	l = 0;
+		// 	// 	while (l < 16)
+		// 	// 	{
+		// 	// 		ft_printf("register_num[%d] = %d\n", l, it_prcs->r[l]);
+		// 	// 		l++;
+		// 	// 	}
+		// 	// 	it_prcs = it_prcs->next;
+		// 	// 	p++;
+		// 	// }
+		// 	ft_printf("0x0000 : ");
+		// 	while (it < 4096)
+		// 	{
+		// 		// if (it != 0 && (it % 63) == 0)
+		// 		// 	ft_printf("\n");
+		// 		if (it != 0 && it % 64 == 0)
+		// 			ft_printf("\n%#.4x : ", it);
+		// 		ft_printf("%02x ", vm.arena[it]);
+		// 		it++;
+		// 	}
+		// }
+		// if (flag == 2)
+		// 	return(0);
 	}
 	//  ft_printf("NUM OF ARGS = %d\n", vm.nbr_of_args);
 	// while (prcs)

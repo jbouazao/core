@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:28:25 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/10 23:58:28 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/04/30 15:15:55 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static t_proc	*dup_prcs(t_proc *prcs, int16_t dir)
 	new->cur_pos = dir;
 	new->cycle_to_wait = 0;
 	new->proc_clr = prcs->proc_clr;
+	new->live = prcs->live;
 	new->flag = 0;
-	new->current_op = -1;
 	new->carry = prcs->carry;
 	new->next = NULL;
 	new->prev = NULL;

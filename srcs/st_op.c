@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:45:31 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:42:06 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/01 01:09:40 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int		st_check_arg(uint8_t c, t_op_arg *args)
 		args->arg2 = 3;
 	else
 		error = 0;
-	if (((c >> 2) & 0b000011) == REG_CODE || ((c >> 2) & 0b000011) == IND_CODE
-	|| ((c >> 2) & 0b000011) == DIR_CODE)
-		error = 0;
+	// if (((c >> 2) & 0b000011) == REG_CODE || ((c >> 2) & 0b000011) == IND_CODE
+	// || ((c >> 2) & 0b000011) == DIR_CODE)
+	// 	error = 0;
 	return (error);
 }
 

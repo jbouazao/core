@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:27:34 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/06/01 01:09:46 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/18 03:52:27 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		lld_check_arg(uint8_t c, t_op_arg *args)
 		error = 0;
 	if ((((c >> 4) & 0b0011) == REG_CODE))
 	{
-		
 		args->arg2 = 1 + 0 * args->sz_arg2++;
 	}
 	else

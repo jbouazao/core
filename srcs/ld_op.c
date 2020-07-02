@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:51:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/06/01 01:09:50 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/18 17:21:13 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ld_execute(t_vm	*vm, t_proc **prcs)
 	crt_p = 0;
 	if ((*prcs)->args.arg1 == DIR_CODE && (crt_p = 4))
 	{
-		tmp_r2 = vm->arena[(*prcs)->cur_pos] << 24 | vm->arena[((*prcs)->cur_pos + 1) % 4096] << 16 | vm->arena[((*prcs)->cur_pos + 2) % 4096] << 8 | vm->arena[((*prcs)->cur_pos + 3) % 4096];
+		tmp_r2 = vm->arena[(*prcs)->cur_pos] << 24 | vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] << 16 | vm->arena[((*prcs)->cur_pos + 2) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos + 3) % MEM_SIZE];
 			// ft_printf("4a %d\n", tmp_r2);
 	}
 	else if ((*prcs)->args.arg1 == IND_CODE && (crt_p = 2))

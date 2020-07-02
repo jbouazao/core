@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:26:20 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:47:54 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/18 15:23:22 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,12 @@ int		sti_execute(t_vm *vm, t_proc **prcs)
 	{
 		if (vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] >= 1 &&
 		vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] <= 16)
-			tmp_idx2 = (*prcs)->r[vm->arena[(*prcs)->cur_pos + 1] - 1];
+			tmp_idx2 = (*prcs)->r[vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] - 1];
 		else
 			return ((*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg2 + (*prcs)->args.sz_arg3);
 	}
 	else if ((*prcs)->args.arg2 == DIR_CODE && (crt_p += 2))
-	{
 		tmp_idx = vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos + 2) % MEM_SIZE] % MEM_SIZE;
-	}
 	else if ((*prcs)->args.arg2 == IND_CODE && (crt_p += 2))
 	{
 		tmp_idx = (vm->arena[(*prcs)->cur_pos + 1] << 8) | ((vm->arena[((*prcs)->cur_pos + 2) % MEM_SIZE]));
@@ -70,8 +68,14 @@ int		sti_execute(t_vm *vm, t_proc **prcs)
 	}
 	if ((*prcs)->args.arg3 == REG_CODE)
 	{
-		tmp_idx2 = (tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + 1 + crt_p) % MEM_SIZE] - 1]) % MEM_SIZE;
-		tmp_idx2 = ((*prcs)->cur_pos - 2 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE;
+		if (vm->arena[((*prcs)->cur_pos + 1 + crt_p) % MEM_SIZE] >= 1 &&
+		vm->arena[((*prcs)->cur_pos + 1 + crt_p) % MEM_SIZE] <= 16)
+		{
+			tmp_idx2 = (tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + 1 + crt_p) % MEM_SIZE] - 1]) % MEM_SIZE;
+			tmp_idx2 = ((*prcs)->cur_pos - 2 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE;
+		}
+		else
+			return ((*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg2 + (*prcs)->args.sz_arg3);
 		crt_p += 1;
 	}
 	else if ((*prcs)->args.arg3 == DIR_CODE)
@@ -83,17 +87,17 @@ int		sti_execute(t_vm *vm, t_proc **prcs)
 	}
 	if (vm->arena[((*prcs)->cur_pos) % MEM_SIZE] >= 1 &&
 		vm->arena[((*prcs)->cur_pos) % MEM_SIZE] <= 16)
-		{
-			tmp_r = (*prcs)->r[vm->arena[(*prcs)->cur_pos] - 1];
-			vm->arena[tmp_idx2] = (tmp_r & 0b11111111000000000000000000000000) >> 24;
-			vm->arena[(tmp_idx2 + 1) % MEM_SIZE] = (tmp_r & 0b00000000111111110000000000000000) >> 16;
-			vm->arena[(tmp_idx2 + 2) % MEM_SIZE] = (tmp_r & 0b00000000000000001111111100000000) >> 8;
-			vm->arena[(tmp_idx2 + 3) % MEM_SIZE] = (tmp_r & 0b00000000000000000000000011111111);;
-			vm->ar_clr[tmp_idx2] = (*prcs)->proc_clr;
-			vm->ar_clr[(tmp_idx2 + 1) % MEM_SIZE] = (*prcs)->proc_clr;
-			vm->ar_clr[(tmp_idx2 + 2) % MEM_SIZE] = (*prcs)->proc_clr;
-			vm->ar_clr[(tmp_idx2 + 3) % MEM_SIZE] = (*prcs)->proc_clr;
-		}
+	{
+		tmp_r = (*prcs)->r[vm->arena[(*prcs)->cur_pos] - 1];
+		vm->arena[tmp_idx2] = (tmp_r & 0b11111111000000000000000000000000) >> 24;
+		vm->arena[(tmp_idx2 + 1) % MEM_SIZE] = (tmp_r & 0b00000000111111110000000000000000) >> 16;
+		vm->arena[(tmp_idx2 + 2) % MEM_SIZE] = (tmp_r & 0b00000000000000001111111100000000) >> 8;
+		vm->arena[(tmp_idx2 + 3) % MEM_SIZE] = (tmp_r & 0b00000000000000000000000011111111);;
+		vm->ar_clr[tmp_idx2] = (*prcs)->proc_clr;
+		vm->ar_clr[(tmp_idx2 + 1) % MEM_SIZE] = (*prcs)->proc_clr;
+		vm->ar_clr[(tmp_idx2 + 2) % MEM_SIZE] = (*prcs)->proc_clr;
+		vm->ar_clr[(tmp_idx2 + 3) % MEM_SIZE] = (*prcs)->proc_clr;
+	}
 	return (crt_p + 1);
 }
 
@@ -104,7 +108,7 @@ int 	sti_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	init_args(&(*prcs)->args);
 	if (!sti_check_arg(vm->arena[(*prcs)->cur_pos], &(*prcs)->args))
 	{
-		(*prcs)->cur_pos = ((skip_bytes(vm->arena[(*prcs)->cur_pos], 4, 2) +
+		(*prcs)->cur_pos = ((skip_bytes(vm->arena[(*prcs)->cur_pos], 2, 3) +
 		(*prcs)->cur_pos)) % MEM_SIZE;
 	}
 	else

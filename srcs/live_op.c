@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 15:42:49 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:42:43 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/18 15:27:59 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int live_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	vm->nbr_lives += 1;
 	if (player_num > 0 && player_num <= vm->num_player)
 		(*player)[player_num - 1].live += 1;
-	(*prcs)->cur_pos += 4;
+	(*prcs)->cur_pos = ((*prcs)->cur_pos + 4) % MEM_SIZE;
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:28:00 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:43:21 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/18 15:34:22 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ int		lldi_execute(t_vm *vm, t_proc **prcs)
 	if ((*prcs)->args.arg2 == REG_CODE)
 	{
 		// ft_printf("res: %x\n", tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1]);
-		tmp_idx2 = tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1];
+		if (vm->arena[((*prcs)->cur_pos  + crt_p) % MEM_SIZE] >= 1 &&
+		vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] <= 16)
+			tmp_idx2 = tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1];
+		else
+		{
+			return ((*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg2 + (*prcs)->args.sz_arg3);
+		}
 		crt_p += 1;
 	}
 	else if ((*prcs)->args.arg2 == DIR_CODE)
@@ -85,8 +91,8 @@ int		lldi_execute(t_vm *vm, t_proc **prcs)
 	if (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] >= 1 &&
 		vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] <= 16)
 	{
-		(*prcs)->r[vm->arena[(*prcs)->cur_pos + crt_p] - 1] = vm->arena[((*prcs)->cur_pos - 2 + tmp_idx2 + MEM_SIZE) % MEM_SIZE] << 24 | vm->arena[((*prcs)->cur_pos - 2 + 1 + tmp_idx2 + MEM_SIZE) % MEM_SIZE] << 16 | vm->arena[((*prcs)->cur_pos - 2 + 2 + tmp_idx2 + MEM_SIZE) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos - 2 + 3 + tmp_idx2 + MEM_SIZE) % MEM_SIZE];
-		(*prcs)->carry = ((*prcs)->r[vm->arena[(*prcs)->cur_pos + crt_p] - 1] == 0) ? 1 : 0;
+		(*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1] = vm->arena[((*prcs)->cur_pos - 2 + tmp_idx2 + MEM_SIZE) % MEM_SIZE] << 24 | vm->arena[((*prcs)->cur_pos - 2 + 1 + tmp_idx2 + MEM_SIZE) % MEM_SIZE] << 16 | vm->arena[((*prcs)->cur_pos - 2 + 2 + tmp_idx2 + MEM_SIZE) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos - 2 + 3 + tmp_idx2 + MEM_SIZE) % MEM_SIZE];
+		(*prcs)->carry = ((*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1] == 0) ? 1 : 0;
 	}
 	return (crt_p + 1);
 }
@@ -98,7 +104,7 @@ int 	lldi_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	init_args(&(*prcs)->args);
 	if (!lldi_check_arg(vm->arena[(*prcs)->cur_pos], &(*prcs)->args))
 	{
-		(*prcs)->cur_pos = ((skip_bytes(vm->arena[(*prcs)->cur_pos], 4, 2) +
+		(*prcs)->cur_pos = ((skip_bytes(vm->arena[(*prcs)->cur_pos], 2, 3) +
 		(*prcs)->cur_pos)) % MEM_SIZE;
 	}
 	else

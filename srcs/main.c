@@ -96,8 +96,8 @@ int main (int ac, char **av)
 	// while (i < 4097)
 	// {
 	//8837 diyat l mouchkila
-	// dump = 10700;
-	dump = 400;
+	dump = 10676;
+	//dump = 400;
 	// 	if ((i % 64) == 0 && i != 0)
 	// 		ft_printf("\n");
 	// 	i++;

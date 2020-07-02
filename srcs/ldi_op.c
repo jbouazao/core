@@ -6,7 +6,7 @@
 /*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:25:52 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:42:26 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/06/18 15:34:23 by oelbelam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ int		ldi_execute(t_vm *vm, t_proc **prcs)
 	}
 	if ((*prcs)->args.arg2 == REG_CODE)
 	{
-		tmp_idx2 = tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1];
+		if (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] >= 1 &&
+		vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] <= 16)
+			tmp_idx2 = tmp_idx + tmp_idx2 + (*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1];
+		else
+			return ((*prcs)->args.sz_arg1 + (*prcs)->args.sz_arg2 + (*prcs)->args.sz_arg3);
 		crt_p += 1;
 	}
 	else if ((*prcs)->args.arg2 == DIR_CODE)
@@ -92,7 +96,7 @@ int 	ldi_op(t_vm *vm, t_proc **prcs, t_proc **head, t_player **player)
 	init_args(&(*prcs)->args);
 	if (!ldi_check_arg(vm->arena[(*prcs)->cur_pos], &(*prcs)->args))
 	{
-		(*prcs)->cur_pos = ((skip_bytes(vm->arena[(*prcs)->cur_pos], 4, 2) +
+		(*prcs)->cur_pos = ((skip_bytes(vm->arena[(*prcs)->cur_pos], 2, 3) +
 		(*prcs)->cur_pos)) % MEM_SIZE;
 	}
 	else

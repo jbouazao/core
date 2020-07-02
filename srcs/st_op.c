@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   st_op.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myMac <myMac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:45:31 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/06/01 01:09:40 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/07/02 19:51:19 by myMac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		st_execute(t_vm	*vm, t_proc **prcs)
 	else if ((*prcs)->args.arg2 == 3)
 	{
 		int k = 0;
-		ind_v = (vm->arena[(*prcs)->cur_pos + crt_p] << 8) | ((vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]));
+		ind_v = (vm->arena[(*prcs)->cur_pos + crt_p] << 8) | ((vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]));// we need to %MEM_SIZE before ((vm->arena[((*prcs)->cur_pos + crt_p) % mem_size])
 		// ft_printf("%x\n", vm->arena[(*prcs)->cur_pos + crt_p]);
 		// ft_printf("%x\n", vm->arena[(*prcs)->cur_pos + 1 + crt_p]);
 		// ind_v *= (ind_v < 0 && (y = -1)) ? -1 : 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myMac <myMac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 14:41:49 by jbouazao          #+#    #+#             */
-/*   Updated: 2020/04/07 18:43:50 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/07/03 19:32:45 by myMac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int		sub_execute(t_vm *vm, t_proc **prcs)
 	vm->arena[((*prcs)->cur_pos + 2) % MEM_SIZE] <= 16)
 	{
 		(*prcs)->r[vm->arena[((*prcs)->cur_pos + 2) % MEM_SIZE] - 1] =
-		(*prcs)->r[vm->arena[(*prcs)->cur_pos] - 1] -
+		(*prcs)->r[vm->arena[(*prcs)->cur_pos % MEM_SIZE] - 1] -
 		(*prcs)->r[vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] - 1];
 		(*prcs)->carry = ((*prcs)->r[vm->arena[((*prcs)->cur_pos + 2) %
 		MEM_SIZE] - 1] == 0) ? 1 : 0;

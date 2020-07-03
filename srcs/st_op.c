@@ -6,7 +6,7 @@
 /*   By: myMac <myMac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 17:45:31 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/07/03 17:53:02 by myMac            ###   ########.fr       */
+/*   Updated: 2020/07/03 18:00:00 by myMac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		st_execute(t_vm	*vm, t_proc **prcs)
 	else if ((*prcs)->args.arg2 == 3)
 	{
 		int k = 0;
-		ind_v = (vm->arena[(*prcs)->cur_pos + crt_p] << 8) | ((vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]));// we need to %MEM_SIZE before ((vm->arena[((*prcs)->cur_pos + crt_p) % mem_size]) temp test
+		ind_v = (vm->arena[(*prcs)->cur_pos + crt_p] << 8) | ((vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]));// we need to %MEM_SIZE before ((vm->arena[((*prcs)->cur_pos + crt_p) % mem_size]) temp test2
 		// ft_printf("%x\n", vm->arena[(*prcs)->cur_pos + crt_p]);
 		// ft_printf("%x\n", vm->arena[(*prcs)->cur_pos + 1 + crt_p]);
 		// ind_v *= (ind_v < 0 && (y = -1)) ? -1 : 1;

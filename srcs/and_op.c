@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   and_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myMac <myMac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 08:56:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/04/07 18:41:24 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/07/03 19:45:56 by myMac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,23 @@ int		and_execute(t_vm *vm, t_proc **prcs)
 
 	tmp_r = 0;
 	crt_p = 0;
-	if ((*prcs)->args.arg1 == REG_CODE && (crt_p += 1))
-		tmp_r = (*prcs)->r[vm->arena[(*prcs)->cur_pos] - 1];
+	if ((*prcs)->args.arg1 == REG_CODE &&
+		vm->arena[((*prcs)->cur_pos) % MEM_SIZE] >= 1 &&
+		vm->arena[((*prcs)->cur_pos) % MEM_SIZE] <= 16 &&
+		(crt_p += 1))
+		tmp_r = (*prcs)->r[vm->arena[(*prcs)->cur_pos % MEM_SIZE] - 1];
 	else if ((*prcs)->args.arg1 == DIR_CODE && (crt_p += 4))
 	{
 		tmp_r = vm->arena[(*prcs)->cur_pos] << 24 |
-		vm->arena[((*prcs)->cur_pos + 1) % 4096] << 16 |
-		vm->arena[((*prcs)->cur_pos + 2) % 4096] << 8 |
-		vm->arena[((*prcs)->cur_pos + 3) % 4096];
+		vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE] << 16 |
+		vm->arena[((*prcs)->cur_pos + 2) % MEM_SIZE] << 8 |
+		vm->arena[((*prcs)->cur_pos + 3) % MEM_SIZE];
 	}
 	else if ((*prcs)->args.arg1 == IND_CODE && (crt_p += 2))
 	{
 		tmp_idx = (vm->arena[(*prcs)->cur_pos] << 8) | ((vm->arena[((*prcs)->cur_pos + 1) % MEM_SIZE]));
 		tmp_idx = ((*prcs)->cur_pos - 2 + ((tmp_idx % IDX_MOD)) + MEM_SIZE) % MEM_SIZE;
-		tmp_r = vm->arena[tmp_idx] << 24 | vm->arena[(tmp_idx + 1) % 4096] << 16 | vm->arena[(tmp_idx + 2) % 4096] << 8 | vm->arena[(tmp_idx + 3) % 4096];
+		tmp_r = vm->arena[tmp_idx] << 24 | vm->arena[(tmp_idx + 1) % MEM_SIZE] << 16 | vm->arena[(tmp_idx + 2) % MEM_SIZE] << 8 | vm->arena[(tmp_idx + 3) % MEM_SIZE];
 	}
 	if ((*prcs)->args.arg2 == REG_CODE)
 		tmp_r &= (*prcs)->r[vm->arena[(*prcs)->cur_pos + crt_p++] - 1];

@@ -6,7 +6,7 @@
 /*   By: myMac <myMac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 08:56:21 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/07/03 19:45:56 by myMac            ###   ########.fr       */
+/*   Updated: 2020/07/05 18:02:41 by myMac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		and_execute(t_vm *vm, t_proc **prcs)
 		tmp_idx = (vm->arena[(*prcs)->cur_pos + crt_p] << 8) |
 		((vm->arena[((*prcs)->cur_pos + crt_p + 1) % MEM_SIZE]));
 		tmp_idx = ((*prcs)->cur_pos - 2 + ((tmp_idx % IDX_MOD)) + MEM_SIZE) % MEM_SIZE;
-		tmp_r &= vm->arena[tmp_idx] << 24 | vm->arena[(tmp_idx + 1) % 4096] << 16 | vm->arena[(tmp_idx + 2) % 4096] << 8 | vm->arena[(tmp_idx + 3) % 4096];
+		tmp_r &= vm->arena[tmp_idx] << 24 | vm->arena[(tmp_idx + 1) % MEM_SIZE] << 16 | vm->arena[(tmp_idx + 2) % MEM_SIZE] << 8 | vm->arena[(tmp_idx + 3) % MEM_SIZE];
 		crt_p += 2;
 	}
 	if (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] >= 1 &&

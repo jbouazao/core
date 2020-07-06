@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ldi_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oelbelam <oelbelam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myMac <myMac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 12:25:52 by oelbelam          #+#    #+#             */
-/*   Updated: 2020/06/18 15:34:23 by oelbelam         ###   ########.fr       */
+/*   Updated: 2020/07/06 17:44:50 by myMac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		ldi_execute(t_vm *vm, t_proc **prcs)
 	}
 	if (vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] >= 1 &&
 		vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] <= 16)
-		(*prcs)->r[vm->arena[(*prcs)->cur_pos + crt_p] - 1] = vm->arena[((*prcs)->cur_pos - 2 + (tmp_idx2 % IDX_MOD) + MEM_SIZE) % MEM_SIZE] << 24 | vm->arena[((*prcs)->cur_pos - 2 + 1 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE] << 16 | vm->arena[((*prcs)->cur_pos - 2 + 2 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos - 2 + 3 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE];
+		(*prcs)->r[vm->arena[((*prcs)->cur_pos + crt_p) % MEM_SIZE] - 1] = vm->arena[((*prcs)->cur_pos - 2 + (tmp_idx2 % IDX_MOD) + MEM_SIZE) % MEM_SIZE] << 24 | vm->arena[((*prcs)->cur_pos - 2 + 1 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE] << 16 | vm->arena[((*prcs)->cur_pos - 2 + 2 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE] << 8 | vm->arena[((*prcs)->cur_pos - 2 + 3 + ((tmp_idx2 % IDX_MOD)) + MEM_SIZE) % MEM_SIZE];
 	return (crt_p + 1);
 }
 
